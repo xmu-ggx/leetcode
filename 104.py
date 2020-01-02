@@ -1,13 +1,16 @@
 
-class TreeNode:
-    def __init__(self, x):
-        self.x = x
-        self.left = None
-        self.right = None
-
 class Solution:
     def maxDepth(self, root):
         if root is None:
             return 0
-        else:
-            return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
+
+        queue = [root]
+        res = 0
+        
+        while queue:
+            res += 1
+            for i in range(len(queue)):
+                node = queue.pop(0)
+                if node.left is not None:queue.append(node.left)
+                if node.right is not None:queue.append(node.right)
+        return res
